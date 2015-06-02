@@ -2,6 +2,7 @@ package com.oansari.appsportfolio;
 
 import android.app.Activity;
 import android.app.Notification;
+import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -32,23 +33,24 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
-        clickEvents();
+
     }
 
-    private void clickEvents() {
-        View.OnClickListener listener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Button clickedButton = (Button) v;
-                Toast.makeText(v.getContext(), String.format(getString(R.string.app_launcher_text), clickedButton.getText().toString()), Toast.LENGTH_LONG).show();
-            }
-        };
-        mSpotifyStreamerButton.setOnClickListener(listener);
-        mSuperDuoButton.setOnClickListener(listener);
-        mXYZReaderButton.setOnClickListener(listener);
-        mBuildItBiggerButton.setOnClickListener(listener);
-        mCapstoneButton.setOnClickListener(listener);
+    public void displayToast(View view) {
+
+        Button button = (Button) view;
+
+        String buttonText = (String) button.getText();
+
+        Context context = getApplicationContext();
+        CharSequence text = "Opens the app " + buttonText;
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
     }
+
+
 
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
